@@ -1,5 +1,7 @@
 from include.CalculatorView import CalculatorView
+from include.CalculatorView import ScientificCalculatorView
 from include.CalculatorModel import CalculatorModel
+from include.CalculatorModel import ScientificCalculatorModel
 from src.CalculatorController import CalculatorController
 
 class CalculatorConfig:
@@ -10,11 +12,22 @@ class CalculatorConfig:
     SIZE = "400x600"
     ICONPATH = r'.\favicon.ico'
 
-if __name__ == "__main__":
+
+def normal_calculator():
     model = CalculatorModel()
     view = CalculatorView(title=CalculatorConfig.TITLE,
                         size=CalculatorConfig.SIZE ,
                         iconPath=CalculatorConfig.ICONPATH)
-    
-    controller = CalculatorController(model, view)
+    return model,view
+
+def scientific_calculator():
+    model = ScientificCalculatorModel()
+    view = ScientificCalculatorView(title=CalculatorConfig.TITLE,
+                                              size=CalculatorConfig.SIZE,
+                                              iconPath=CalculatorConfig.ICONPATH)
+    return model,view
+
+
+if __name__ == "__main__":
+    controller = CalculatorController(*scientific_calculator())
     controller.run()
